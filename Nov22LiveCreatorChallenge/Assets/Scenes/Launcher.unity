@@ -229,7 +229,7 @@ GameObject:
   - component: {fileID: 294588345}
   - component: {fileID: 294588344}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: ConnectingProgress
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -382,6 +382,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxPlayersPerRoom: 2
+  controlPanel: {fileID: 1764289028}
+  progressLabel: {fileID: 294588342}
 --- !u!4 &352030387
 Transform:
   m_ObjectHideFlags: 0

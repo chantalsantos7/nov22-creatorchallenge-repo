@@ -26,6 +26,7 @@ namespace CS.CreatorChallenge.Nov22
         #region Private Fields
 
         string gameVersion = "1";
+        bool isConnecting;
 
         #endregion
 
@@ -55,7 +56,11 @@ namespace CS.CreatorChallenge.Nov22
         public override void OnConnectedToMaster()
         {
             Debug.Log("Pun Basics Tutorial/Launcher: OnConnectedToMaster called by PUN");
-            PhotonNetwork.JoinRandomRoom();
+            if (isConnecting)
+            {
+                PhotonNetwork.JoinRandomRoom();
+                isConnecting = false;
+            }
         }
 
         public override void OnDisconnected(DisconnectCause cause)
@@ -74,6 +79,10 @@ namespace CS.CreatorChallenge.Nov22
         public override void OnJoinedRoom()
         {
             Debug.Log("PUN Basics Tutorial/Launcher: OnJoinedRoom() called by PUN. Now this client is in a room.");
+            if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
+            {
+                PhotonNetwork.LoadLevel("Room for 1");
+            }
         }
 
         #endregion
@@ -91,9 +100,11 @@ namespace CS.CreatorChallenge.Nov22
             }
             else
             {
-                PhotonNetwork.ConnectUsingSettings();
+                isConnecting = PhotonNetwork.ConnectUsingSettings();
                 PhotonNetwork.GameVersion = gameVersion;
             }
+
+            
         }
 
         #endregion
